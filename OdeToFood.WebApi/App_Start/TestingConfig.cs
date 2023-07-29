@@ -10,7 +10,7 @@ namespace OdeToFood.WebApi.App_Start
         public static void Register(HttpConfiguration config)
         {
             // Log Request
-            // config.MessageHandlers.Add(new IntermittentErrorRequestHandler());
+            config.MessageHandlers.Add(new IntermittentErrorRequestHandler());
 
             // ... other configurations
         }
@@ -19,18 +19,22 @@ namespace OdeToFood.WebApi.App_Start
     public class IntermittentErrorRequestHandler : DelegatingHandler
     {
         static int _requestCount = 0;
-        static int _backToBackExceptionCount = 4;
+        static int _backToBackExceptionCount = 2;
+
+        static bool error = false;
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (_backToBackExceptionCount > 0 && ++_requestCount % (_backToBackExceptionCount+1) > 0)
+            var response = await base.SendAsync(request, cancellationToken);
+
+            if (error && _backToBackExceptionCount > 0 && ++_requestCount % (_backToBackExceptionCount + 1) > 0)
             {
-                var response = new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
-                response.Content = new StringContent("Intermittent Error");
-                return response;
+                var errorResponse = new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+                errorResponse.Content = new StringContent("Intermittent Error");
+                return errorResponse;
             }
 
-            return await base.SendAsync(request, cancellationToken); ;
+            return response;
         }
     }
 }
