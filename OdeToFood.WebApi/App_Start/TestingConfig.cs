@@ -21,7 +21,7 @@ namespace OdeToFood.WebApi.App_Start
         static int _requestCount = 0;
         static int _backToBackExceptionCount = 2;
 
-        static bool error = false;
+        static bool error = true;
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
