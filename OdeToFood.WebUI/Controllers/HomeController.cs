@@ -17,6 +17,8 @@ namespace OdeToFood.WebUI.Controllers
         public async Task<ActionResult> Index()
         {
             var message = ConfigurationManager.AppSettings["message"];
+            var greeting = ConfigurationManager.AppSettings["greeting"];
+            ViewBag.Greeting = greeting ?? "Default Greetings";
             ViewBag.Message = message ?? "HELLO WORLD";
 
             var model = await _api.GetAllAsync();
