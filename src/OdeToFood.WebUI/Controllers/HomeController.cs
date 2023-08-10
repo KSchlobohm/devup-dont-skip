@@ -19,6 +19,8 @@ namespace OdeToFood.WebUI.Controllers
             var message = ConfigurationManager.AppSettings["message"];
             ViewBag.Message = message ?? "HELLO WORLD";
 
+            //todo: get greeting from configuration
+
             var model = await _api.GetAllAsync();
             return View(model);
         }

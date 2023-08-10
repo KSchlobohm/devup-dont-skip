@@ -41,11 +41,16 @@ Run the app and observe the CRUD operations for ODE to Food an MVC web app with 
 ## Troubleshooting
 Tips for dealing with issues.
 
-**Could not find a part of the path**
+**Server Error: Could not find a part of the path**
 ![#image of runtime roslyn csc.exe error](./docs/CouldNotFindAPartOfThePath.png)
 
-Use the Package Manager Console to run the following command for both ASP.NET web projects.
+- Use the Package Manager Console to run the following command for both ASP.NET web projects.
 
 ```sh
 Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
 ```
+
+**Server Error: No connection could be made**
+![#image of runtime connection error](./docs/NoConnectionCouldBeMade.png)
+
+- Configure the solution to set both web apps as startup projects.

@@ -4,10 +4,8 @@ using OdeToFood.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.UI.WebControls;
 
 namespace OdeToFood.WebUI.Services
 {
@@ -20,7 +18,7 @@ namespace OdeToFood.WebUI.Services
             if (_client == null)
             {
                 _client = new HttpClient();
-                // TODO - read configuration for API URL
+                // don't hard code... read configuration for API URL
                 _client.BaseAddress = new Uri("https://localhost:44309");
             }
             return _client;
