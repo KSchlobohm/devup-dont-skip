@@ -33,6 +33,7 @@ Run the app and observe the CRUD operations for ODE to Food an MVC web app with 
 - [Reliable web app pattern - Azure Architecture Center | Microsoft Learn](https://learn.microsoft.com/azure/architecture/web-apps/guides/reliable-web-app/overview)
 - [Retry pattern - Azure Architecture Center | Microsoft Learn](https://learn.microsoft.com/azure/architecture/patterns/retry)
 - [Make HTTP requests using IHttpClientFactory in ASP.NET Core | Microsoft Learn](https://learn.microsoft.com/aspnet/core/fundamentals/http-requests?view=aspnetcore-7.0#use-polly-based-handlers)
+- [HttpClient guidelines for .NET - .NET | Microsoft Learn](https://learn.microsoft.com/dotnet/fundamentals/networking/http/httpclient-guidelines#recommended-use)
 - [Use the IHttpClientFactory - .NET | Microsoft Learn](https://learn.microsoft.com/dotnet/core/extensions/httpclient-factory?source=recommendations)
 - [Configuration builders for ASP.NET | Microsoft Learn](https://learn.microsoft.com/en-us/aspnet/config-builder)
 - [Cloud-native development with .NET 8 | BRK201H](https://youtu.be/qoNflu8aRaA?t=1421)
