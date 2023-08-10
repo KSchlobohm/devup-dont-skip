@@ -2,7 +2,7 @@
 
 namespace OdeToFood.WebUI.Services
 {
-    internal interface ILogger
+    public interface ILogger
     {
         void LogInformation(string message, Exception ex = null);
         void LogError(string message, Exception ex = null);
