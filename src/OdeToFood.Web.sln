@@ -11,7 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OdeToFood.Data", "OdeToFood
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{A1A2B6F8-186F-4E7F-8950-255628D906D2}"
 	ProjectSection(SolutionItems) = preProject
-		configuration-demo.md = configuration-demo.md
+		demo-configuration.md = demo-configuration.md
+		demo-reliableservices.md = demo-reliableservices.md
 	EndProjectSection
 EndProject
 Global
