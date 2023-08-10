@@ -2,8 +2,11 @@
 
 This demo capture changes shown in the Pull Request https://github.com/KSchlobohm/devup-dont-skip/pull/1/files
 
+@TODO - Add screenshots for bindingRedirect fixes that Visual Studio handles
+
 ## Pre-requisite
 
+1. Configuration builders require ASP.NET version 4.7.1 or later.
 1. Create an environment variable to be used with the External Configuration code sample.
 
 ![#image of environment var used in demo](../docs/UserVariables.png)
@@ -14,10 +17,13 @@ This demo capture changes shown in the Pull Request https://github.com/KSchloboh
 
 
 ## Step 1: Load Configuration from Environment vars
-
-- How can we load configuration from different sources without changing code?
+How can we load configuration from different sources without changing code?
 
 **Demo**
+
+1. Run the web app and observe
+
+- There's a greeting in the index.cshtml that comes from web.config
 
 1. Add a package reference to the *OdeToFood.WebUI* project.
 
@@ -26,7 +32,6 @@ This demo capture changes shown in the Pull Request https://github.com/KSchloboh
 1. View **Warnings** and use VisualStudio to fix bindingRedirects as recommended
 
     ...insert image...
-
 
 1. Modify the `web.config` of OdeToFood.WebUI to use Configuration Builders
 
@@ -64,6 +69,10 @@ This demo capture changes shown in the Pull Request https://github.com/KSchloboh
         <add key="UnobtrusiveJavaScriptEnabled" value="true" />
       </appSettings>
     ```
+
+1. Run the web app and observe
+
+- We didn't change C# code but we changed the behavior and can see a new message on the home page.
 
 ## Step 2: Override Environment Configuration with a config file
 Let's explore layered configuration by viewing 2 configuration sources and 2 different messages.
@@ -137,3 +146,8 @@ Let's explore layered configuration by viewing 2 configuration sources and 2 dif
         <add key="UnobtrusiveJavaScriptEnabled" value="true" />
       </appSettings>
     ```
+
+1. Run the web app and observe
+
+- The value for the greeting is overriden from config.json as expected
+- We can see an order of operations, a priority, of configuration where Environment vars were overriden by config.json data.
