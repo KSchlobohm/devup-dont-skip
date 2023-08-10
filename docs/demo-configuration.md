@@ -9,7 +9,7 @@ This demo capture changes shown in the Pull Request https://github.com/KSchloboh
 1. Configuration builders require ASP.NET version 4.7.1 or later.
 1. Create an environment variable to be used with the External Configuration code sample.
 
-![#image of environment var used in demo](../docs/UserVariables.png)
+![#image of environment var used in demo](../docs/images/UserVariables.png)
 
 |Name|Value|
 |--|--|

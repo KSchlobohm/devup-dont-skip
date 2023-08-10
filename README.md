@@ -11,17 +11,17 @@ Run the app and observe the CRUD operations for ODE to Food an MVC web app with 
     Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
     ```
 
-    ![#image of Package Manager Console command](./docs/RestoreTheDotNetCompilerPlatformPackage.png)
+    ![#image of Package Manager Console command](./docs/images/RestoreTheDotNetCompilerPlatformPackage.png)
 
 1. Set multiple startup projects
 
-    ![#image showing that two start up projects should be selected](./docs/SetMultipleStartupProjects.png)
+    ![#image showing that two start up projects should be selected](./docs/images/SetMultipleStartupProjects.png)
 
     https://learn.microsoft.com/en-us/visualstudio/ide/how-to-set-multiple-startup-projects?view=vs-2022
 
 1. Start the solution and view the Restaurants page
 
-    ![#image of the restaurants page](./docs/ImageOfTheRestaurantsPage.png)
+    ![#image of the restaurants page](./docs/images/ImageOfTheRestaurantsPage.png)
 
     You are now ready to use the Pull Requests to learn about how to apply Configuration Builders for External Configuration and [Polly](https://github.com/App-vNext/Polly) to build reliable service communication.
 
@@ -43,7 +43,7 @@ Run the app and observe the CRUD operations for ODE to Food an MVC web app with 
 Tips for dealing with issues.
 
 **Server Error: Could not find a part of the path**
-![#image of runtime roslyn csc.exe error](./docs/CouldNotFindAPartOfThePath.png)
+![#image of runtime roslyn csc.exe error](./docs/images/CouldNotFindAPartOfThePath.png)
 
 - Use the Package Manager Console to run the following command for both ASP.NET web projects.
 
@@ -52,6 +52,6 @@ Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
 ```
 
 **Server Error: No connection could be made**
-![#image of runtime connection error](./docs/NoConnectionCouldBeMade.png)
+![#image of runtime connection error](./docs/images/NoConnectionCouldBeMade.png)
 
 - Configure the solution to set both web apps as startup projects.
