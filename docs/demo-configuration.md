@@ -13,7 +13,7 @@ This demo capture changes shown in the Pull Request https://github.com/KSchloboh
 
 |Name|Value|
 |--|--|
-|AppSetting_message1|Loading external configurations is like asking a penguin to pick your outfit – you might end up with a tuxedo at the beach!|
+|AppSetting_message1|I'm a secret message stored as an environment variable.|
 
 
 ## Step 1: Load Configuration from Environment vars
@@ -60,7 +60,7 @@ How can we load configuration from different sources without changing code?
     > One of the *gotchas* of this approach is that the alue must exist (even if blank) in the web.config file before it can be overriden with a config builder.
 
     ```xml
-      <appSettings configBuilders="AS_ENVIRONMENT">
+      <appSettings configBuilders="AS_Environment">
         <add key="message1" value="Giving external configurations to your code is like letting a pancake flip itself – one moment it's brunch, the next it's trying to dance on the griddle!" />
         <add key="message2" value="Getting external configurations into your system is like giving a cat a GPS – you never know if it'll lead to a gourmet restaurant or a cardboard box alley!"/>
 
