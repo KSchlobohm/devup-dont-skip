@@ -13,7 +13,7 @@ This demo capture changes shown in the Pull Request https://github.com/KSchloboh
 
 |Name|Value|
 |--|--|
-|AppSetting_message|Have a great environment|
+|AppSetting_message1|Loading external configurations is like asking a penguin to pick your outfit – you might end up with a tuxedo at the beach!|
 
 
 ## Step 1: Load Configuration from Environment vars
@@ -27,7 +27,7 @@ How can we load configuration from different sources without changing code?
 
 1. Add a package reference to the *OdeToFood.WebUI* project.
 
-    > Microsoft.Configuration.ConfigurationBuilders.Environment
+    > Install-Package Microsoft.Configuration.ConfigurationBuilders.Environment -ProjectName OdeToFood.WebUI -Version 3.0.0
 
 1. View **Warnings** and use VisualStudio to fix bindingRedirects as recommended
 
@@ -61,7 +61,8 @@ How can we load configuration from different sources without changing code?
 
     ```xml
       <appSettings configBuilders="AS_ENVIRONMENT">
-        <add key="message" value="Have a great day" />
+        <add key="message1" value="Giving external configurations to your code is like letting a pancake flip itself – one moment it's brunch, the next it's trying to dance on the griddle!" />
+        <add key="message2" value="Getting external configurations into your system is like giving a cat a GPS – you never know if it'll lead to a gourmet restaurant or a cardboard box alley!"/>
 
         <add key="webpages:Version" value="3.0.0.0" />
         <add key="webpages:Enabled" value="false" />
@@ -84,36 +85,19 @@ Let's explore layered configuration by viewing 2 configuration sources and 2 dif
 
 1. Add a package reference to the *OdeToFood.WebUI* project.
 
-    > Microsoft.Configuration.ConfigurationBuilders.Json
+    > Install-Package Microsoft.Configuration.ConfigurationBuilders.Json -ProjectName OdeToFood.WebUI -Version 3.0.0
 
 1. View **Warnings** and use VisualStudio to fix bindingRedirects as recommended
 
     ...insert image...
-
-1. Update the Home/Index controller action to display a new message.
-
-    ```cs
-    //todo: get greeting from configuration
-    var greeting = ConfigurationManager.AppSettings["greeting"];
-    ViewBag.Greeting = greeting ?? "Default Greetings";
-    ```
-
-1. Update the Home/Index view to display a new message.
-
-    ```cshtml
-        @* //todo: display greeting *@
-        <div>
-            @ViewBag.Greeting
-        </div>
-    ```
 
 1. Create a new file named config.json
 
     ```json
     {
         "appSettings": {
-            "message": "Have a great json",
-            "greeting": "Hello dev up 2023!"
+            "message1": "Imagine explaining external configurations to a coffee machine – suddenly, your app's brewing up espressos of efficiency and lattes of laughter!",
+            "message2": "Imagine if your app's external configurations were ingredients at a salad bar – suddenly, your code thinks it's a mixologist offering code-cumber cocktails and data-dressing delights"
         }
     }
     ```
@@ -136,10 +120,10 @@ Let's explore layered configuration by viewing 2 configuration sources and 2 dif
     1. Override the attribute in AppSettings and define the new *greeting* configuration
     
     ```xml
-      <appSettings configBuilders="AS_ENVIRONMENT">
-        <add key="message" value="Have a great day" />
-        <add key="greeting" value="must exist to be overriden"/>
-
+      <appSettings configBuilders="AS_Json, AS_Environment">
+        <add key="message1" value="Giving external configurations to your code is like letting a pancake flip itself – one moment it's brunch, the next it's trying to dance on the griddle!" />
+        <add key="message2" value="Getting external configurations into your system is like giving a cat a GPS – you never know if it'll lead to a gourmet restaurant or a cardboard box alley!"/>
+	
         <add key="webpages:Version" value="3.0.0.0" />
         <add key="webpages:Enabled" value="false" />
         <add key="ClientValidationEnabled" value="true" />

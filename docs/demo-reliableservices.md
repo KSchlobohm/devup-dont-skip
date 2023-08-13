@@ -32,13 +32,17 @@ Fix the error by adding reliable service communication with Polly.
 
 1. Add the *Polly* NuGet package
 
-	> Polly version 7.0.0.0
+	> Install-Package Polly -ProjectName OdeToFood.WebUI -Version 7.2.4
 	
 1. View **Warnings** and use VisualStudio to fix bindingRedirects as recommended
 
     ...insert image...
 	
-1. Create a new class `ReliableRestaurantApiData`
+1. Create a new class
+
+    ```cs
+    ReliableRestaurantApiData
+    ```
 
 	> Copy all of the code from the `RestaurantApiData.cs` class so we can override methods one by one
 	
@@ -87,25 +91,25 @@ Fix the error by adding reliable service communication with Polly.
 
 1. Add a method `InitializePolicy`
 
-        ```cs
-        private void InitializePolicy(ILogger logger)
+    ```cs
+    private void InitializePolicy(ILogger logger)
+    {
+        if (_httpRetryPolicy == null)
         {
-            if (_httpRetryPolicy == null)
-            {
-                _httpRetryPolicy = Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
-                    .WaitAndRetryAsync(new[]
-                    {
-                        TimeSpan.FromMilliseconds(100),
-                        TimeSpan.FromMilliseconds(250),
-                        TimeSpan.FromMilliseconds(350)
-                    }, (exception, timeSpan) =>
-                    {
-                        // Add logic to be executed before each retry, such as logging
-                        logger.LogError("This error will be retried", exception.Exception);
-                    });
-            }
+            _httpRetryPolicy = Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
+                .WaitAndRetryAsync(new[]
+                {
+                    TimeSpan.FromMilliseconds(100),
+                    TimeSpan.FromMilliseconds(250),
+                    TimeSpan.FromMilliseconds(350)
+                }, (exception, timeSpan) =>
+                {
+                    // Add logic to be executed before each retry, such as logging
+                    logger.LogError("This error will be retried", exception.Exception);
+                });
         }
-        ```
+    }
+    ```
 
 1. Run the web app and observe
 

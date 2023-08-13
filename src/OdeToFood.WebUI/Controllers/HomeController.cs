@@ -16,10 +16,11 @@ namespace OdeToFood.WebUI.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var message = ConfigurationManager.AppSettings["message"];
-            ViewBag.Message = message ?? "HELLO WORLD";
+            var message = ConfigurationManager.AppSettings["message1"];
+            ViewBag.Message1 = message ?? "message1: is missing";
 
-            //todo: get greeting from configuration
+            var message2 = ConfigurationManager.AppSettings["message2"];
+            ViewBag.Message2 = message2 ?? "message2: is missing";
 
             var model = await _api.GetAllAsync();
             return View(model);
