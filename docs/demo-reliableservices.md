@@ -1,6 +1,6 @@
 # Reliable Service Communication Demo script
 
-This demo capture changes shown in the Pull Request https://github.com/KSchlobohm/devup-dont-skip/pull/2/files
+This demo capture changes shown in the Pull Request https://github.com/KSchlobohm/devup-dont-skip/pull/5/files
 
 ## Pre-requisite
 We're going to assume your code supports Dependency Injection. That's not a requirement but it makes it easier to demo.
