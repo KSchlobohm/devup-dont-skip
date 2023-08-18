@@ -64,15 +64,9 @@ namespace OdeToFood.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            await db.AddAsync(restaurant);
+            var dto = await db.AddAsync(restaurant);
 
-            var dto = new Restaurant()
-            {
-                Id = restaurant.Id,
-                Cuisine = restaurant.Cuisine,
-            };
-
-            return CreatedAtRoute("DefaultApi", new { id = restaurant.Id }, dto);
+            return CreatedAtRoute("DefaultApi", new { id = dto.Id }, dto);
         }
 
         // PUT: api/Restaurant/5
