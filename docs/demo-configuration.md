@@ -1,8 +1,6 @@
 # Configuration Demo script
 
-This demo capture changes shown in the Pull Request https://github.com/KSchlobohm/devup-dont-skip/pull/1/files
-
-@TODO - Add screenshots for bindingRedirect fixes that Visual Studio handles
+This demo capture changes shown in the Pull Request https://github.com/KSchlobohm/devup-dont-skip/pull/4/files
 
 ## Pre-requisite
 

@@ -1,8 +1,6 @@
 # Reliable Service Communication Demo script
 
-This demo capture changes shown in the Pull Request https://github.com/KSchlobohm/devup-dont-skip/pull/2/files
-
-@TODO - update steps with changes to the `_backToBackExceptionCount` variable or modify demo to always expect the same error behavior.
+This demo capture changes shown in the Pull Request https://github.com/KSchlobohm/devup-dont-skip/pull/5/files
 
 ## Pre-requisite
 We're going to assume your code supports Dependency Injection. That's not a requirement but it makes it easier to demo.
@@ -64,10 +62,7 @@ Fix the error by adding reliable service communication with Polly.
                 {
                     var data = await content.ReadAsStringAsync();
                     var restaurants = JsonConvert.DeserializeObject<IEnumerable<Restaurant>>(data);
-                    if (_knownRestaurants == null)
-                    {
-                        _knownRestaurants = restaurants;
-                    }
+                    
                     return restaurants;
                 }
             }
@@ -125,12 +120,7 @@ What happens if we Retry on every error?
     ```cs
         public async Task<Restaurant> AddAsync(Restaurant restaurant)
         {
-            if (restaurant == null)
-            {
-                throw new ArgumentNullException(nameof(restaurant));
-            }
-
-            string jsonRestaurant = JsonConvert.SerializeObject(restaurant);
+            ...
 
             var response = await _httpRetryPolicy.ExecuteAsync(() =>
             {
@@ -138,19 +128,7 @@ What happens if we Retry on every error?
                 return GetHttpClient().PostAsync($"api/restaurants", content);
             });
 
-            if (response.IsSuccessStatusCode)
-            {
-                using (HttpContent responseContent = response.Content)
-                {
-                    var data = await responseContent.ReadAsStringAsync();
-                    var responseRestaurant = JsonConvert.DeserializeObject<Restaurant>(data);
-                    return responseRestaurant;
-                }
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
+            ...
         }
     ```
     
@@ -194,7 +172,7 @@ Now the code is slower.
                             0.5, // Break on >=50% actions result in handled exceptions...
                             samplingDuration: TimeSpan.FromSeconds(10), // ... over any 10 second period
                             minimumThroughput: 8, // ... provided at least 8 actions in the 10 second period.
-                            durationOfBreak: TimeSpan.FromSeconds(10) // Break for 30 seconds.
+                            durationOfBreak: TimeSpan.FromSeconds(10) // Break for 10 seconds.
                         ));
             }
         }
