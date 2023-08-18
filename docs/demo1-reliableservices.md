@@ -115,7 +115,7 @@ What happens if we Retry on every error?
 
 **Demo**
 
-1. Replace the `AddAsync` method
+1. Modify the `AddAsync` method
 
     ```cs
         public async Task<Restaurant> AddAsync(Restaurant restaurant)
@@ -136,7 +136,75 @@ What happens if we Retry on every error?
 
 - The code works. It added the same data multiple times. It wouldn't be great if that was a credit card charge API.
 
-## Step 4: Add Circuit Breaker
+## Step 4: Use a nonce
+Idempotent operations are great when we can build them. Read, Update, and Delete could be idempotent but we can see that Add should only run once.
+
+1. Modify the `GetAsync` method (let's fix that error page we keep seeing)
+
+    ```cs
+        public async Task<Restaurant> GetAsync(int id)
+        {
+            var response = await _httpRetryPolicy.ExecuteAsync(() => GetHttpClient().GetAsync($"api/restaurants/{id}"));
+
+            ...
+        }
+    ```
+
+1. Modify the `AddAsync` method
+
+    ```cs
+        public async Task<Restaurant> AddAsync(Restaurant restaurant)
+        {
+            ...
+
+            var nonceData = Guid.NewGuid().ToString();
+            var response = await _httpRetryPolicy.ExecuteAsync(() =>
+            {
+                var content = new StringContent(jsonRestaurant, Encoding.UTF8, "application/json");
+                content.Headers.Add("X-Nonce", nonceData);
+                return GetHttpClient().PostAsync($"api/restaurants", content);
+            });
+
+            ...
+        }
+    ```
+
+1. Now we update the API Controller to read this value.
+
+    ```cs
+    private static readonly System.Web.Caching.Cache _cache = new System.Web.Caching.Cache();
+
+    [ResponseType(typeof(Restaurant))]
+    public async Task<IHttpActionResult> PostRestaurant(Restaurant restaurant)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        string nonce = Request.Headers.GetValues("X-Nonce")?.FirstOrDefault(); // Get the nonce value from the request headers
+
+        // Check if the nonce is already in the cache
+        if (_cache[nonce] != null)
+        {
+            // Duplicate request detected
+            var existingRestaurant = await db.GetAsync((int)_cache[nonce]);
+            return CreatedAtRoute("DefaultApi", new { id = existingRestaurant.Id }, existingRestaurant);
+        }
+
+        var dto = await db.AddAsync(restaurant);
+        // Add the nonce to the cache with a short expiration time
+        _cache.Insert(nonce, dto.Id, null, DateTime.UtcNow.AddMinutes(5), System.Web.Caching.Cache.NoSlidingExpiration);
+
+        return CreatedAtRoute("DefaultApi", new { id = dto.Id }, dto);
+    }
+    ```
+
+1. Run the web app and observe
+
+- We don't see the multiple results any more!
+
+## Step 5: Add Circuit Breaker
 Now the code is slower.
 
 - What happens if the service starts to break all the time?
@@ -182,7 +250,7 @@ Now the code is slower.
 
 - And now the code is broke again. But this time we meant to do that!
 
-## Step 5: Add Fallback logic
+## Step 6: Add Fallback logic
 Now the code fails fast, but we're back to failing code.
 
 - Let's use the Fallback approach and build graceful degradation into the app.
