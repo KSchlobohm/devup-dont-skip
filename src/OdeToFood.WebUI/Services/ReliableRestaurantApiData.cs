@@ -70,9 +70,11 @@ namespace OdeToFood.WebUI.Services
 
             string jsonRestaurant = JsonConvert.SerializeObject(restaurant);
 
+            var nonceData = Guid.NewGuid().ToString();
             var response = await _httpRetryPolicy.ExecuteAsync(() =>
             {
                 var content = new StringContent(jsonRestaurant, Encoding.UTF8, "application/json");
+                content.Headers.Add("X-Nonce", nonceData);
                 return GetHttpClient().PostAsync($"api/restaurants", content);
             });
 
@@ -124,24 +126,31 @@ namespace OdeToFood.WebUI.Services
 
         public async Task<IEnumerable<Restaurant>> GetAllAsync()
         {
-            var response = await _httpRetryPolicy.ExecuteAsync(() => GetHttpClient().GetAsync($"api/restaurants"));
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                using (HttpContent content = response.Content)
+                var response = await _httpRetryPolicy.ExecuteAsync(() => GetHttpClient().GetAsync($"api/restaurants"));
+
+                if (response.IsSuccessStatusCode)
                 {
-                    var data = await content.ReadAsStringAsync();
-                    var restaurants = JsonConvert.DeserializeObject<IEnumerable<Restaurant>>(data);
-                    if (_knownRestaurants == null)
+                    using (HttpContent content = response.Content)
                     {
-                        _knownRestaurants = restaurants;
+                        var data = await content.ReadAsStringAsync();
+                        var restaurants = JsonConvert.DeserializeObject<IEnumerable<Restaurant>>(data);
+                        if (_knownRestaurants == null)
+                        {
+                            _knownRestaurants = restaurants;
+                        }
+                        return restaurants;
                     }
-                    return restaurants;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
                 }
             }
-            else
+            catch (BrokenCircuitException)
             {
-                throw new Exception(response.ReasonPhrase);
+                return _knownRestaurants;
             }
         }
 

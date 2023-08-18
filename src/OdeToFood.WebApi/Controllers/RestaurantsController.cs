@@ -1,6 +1,8 @@
 ﻿using OdeToFood.Data.Models;
 using OdeToFood.Data.Services;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -55,6 +57,8 @@ namespace OdeToFood.WebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        private static readonly System.Web.Caching.Cache _cache = new System.Web.Caching.Cache();
+
         // POST: api/Restaurants
         [ResponseType(typeof(Restaurant))]
         public async Task<IHttpActionResult> PostRestaurant(Restaurant restaurant)
@@ -64,15 +68,21 @@ namespace OdeToFood.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            await db.AddAsync(restaurant);
+            string nonce = Request.Headers.GetValues("X-Nonce")?.FirstOrDefault(); // Get the nonce value from the request headers
 
-            var dto = new Restaurant()
+            // Check if the nonce is already in the cache
+            if (_cache[nonce] != null)
             {
-                Id = restaurant.Id,
-                Cuisine = restaurant.Cuisine,
-            };
+                // Duplicate request detected
+                var existingRestaurant = await db.GetAsync((int)_cache[nonce]);
+                return CreatedAtRoute("DefaultApi", new { id = existingRestaurant.Id }, existingRestaurant);
+            }
 
-            return CreatedAtRoute("DefaultApi", new { id = restaurant.Id }, dto);
+            var dto = await db.AddAsync(restaurant);
+            // Add the nonce to the cache with a short expiration time
+            _cache.Insert(nonce, dto.Id, null, DateTime.UtcNow.AddMinutes(5), System.Web.Caching.Cache.NoSlidingExpiration);
+
+            return CreatedAtRoute("DefaultApi", new { id = dto.Id }, dto);
         }
 
         // PUT: api/Restaurant/5
