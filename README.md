@@ -31,6 +31,8 @@ Run the app and observe the CRUD operations for ODE to Food an MVC web app with 
 ## Additional resources
 
 - [Reliable web app pattern - Azure Architecture Center | Microsoft Learn](https://learn.microsoft.com/azure/architecture/web-apps/guides/reliable-web-app/overview)
+    - [Introducing the Reliable Web App Pattern for .NET - .NET Blog (microsoft.com)](https://devblogs.microsoft.com/dotnet/introducing-the-reliable-web-app-pattern/)
+    - [The Reliable Web App Pattern for .NET - YouTube](https://www.youtube.com/playlist?list=PLI7iePan8aH54gIDJquV61dE3ENyaDi3Q)
 - [Retry pattern - Azure Architecture Center | Microsoft Learn](https://learn.microsoft.com/azure/architecture/patterns/retry)
 - [Make HTTP requests using IHttpClientFactory in ASP.NET Core | Microsoft Learn](https://learn.microsoft.com/aspnet/core/fundamentals/http-requests?view=aspnetcore-7.0#use-polly-based-handlers)
 - [HttpClient guidelines for .NET - .NET | Microsoft Learn](https://learn.microsoft.com/dotnet/fundamentals/networking/http/httpclient-guidelines#recommended-use)
