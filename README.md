@@ -40,6 +40,8 @@ Run the app and observe the CRUD operations for ODE to Food an MVC web app with 
 - [Configuration builders for ASP.NET | Microsoft Learn](https://learn.microsoft.com/en-us/aspnet/config-builder)
 - [Cloud-native development with .NET 8 | BRK201H](https://youtu.be/qoNflu8aRaA?t=1421)
     - [NuGet Gallery | Microsoft.Extensions.Http.Resilience](https://www.nuget.org/packages/Microsoft.Extensions.Http.Resilience)
+- [Migrate an ASP.NET web application to Azure with Visual Studio - Training | Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/migrate-aspnet-web-application/)
+- [Cache ASP.NET Session State Provider | Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-aspnet-session-state-provider)
 
 ## Troubleshooting
 Tips for dealing with issues.
