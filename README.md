@@ -42,6 +42,9 @@ Run the app and observe the CRUD operations for ODE to Food an MVC web app with 
     - [NuGet Gallery | Microsoft.Extensions.Http.Resilience](https://www.nuget.org/packages/Microsoft.Extensions.Http.Resilience)
 - [Migrate an ASP.NET web application to Azure with Visual Studio - Training | Microsoft Learn](https://learn.microsoft.com/en-us/training/paths/migrate-aspnet-web-application/)
 - [Cache ASP.NET Session State Provider | Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-aspnet-session-state-provider)
+- [Tutorial: Access data with managed identity - Azure App Service | Microsoft Learn](https://learn.microsoft.com/en-us/azure/app-service/tutorial-connect-msi-sql-database?tabs=windowsclient%2Cef%2Cdotnet#3-modify-your-project)
+- [How to authenticate .NET applications with Azure services | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication/?tabs=command-line#use-defaultazurecredential-in-an-application)
+- [Azure Identity 101 - DefaultAzureCredential | Jon Gallant](https://blog.jongallant.com/2021/08/azure-identity-101/)
 
 ## Troubleshooting
 Tips for dealing with issues.
