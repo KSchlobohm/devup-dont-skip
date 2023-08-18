@@ -9,8 +9,10 @@ namespace OdeToFood.Data.Models
     public enum CuisineType
     {
         None,
+        Asian,
         Italian,
         Indian,
-        French
+        French,
+        Pub
     }
 }
