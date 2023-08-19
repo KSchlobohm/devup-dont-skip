@@ -35,7 +35,7 @@ namespace OdeToFood.WebUI.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return View(new Restaurant());
         }
 
         [HttpPost]
