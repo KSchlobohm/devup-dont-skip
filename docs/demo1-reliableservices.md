@@ -30,7 +30,10 @@ Fix the error by adding reliable service communication with Polly.
 
 1. Add the *Polly* NuGet package
 
-	> Install-Package Polly -ProjectName OdeToFood.WebUI -Version 7.2.4
+```sh
+Install-Package Polly -ProjectName OdeToFood.WebUI -Version 7.2.4
+```
+    
 	
 1. View **Warnings** and use VisualStudio to fix bindingRedirects as recommended
 
@@ -38,9 +41,9 @@ Fix the error by adding reliable service communication with Polly.
 	
 1. Create a new class
 
-    ```cs
-    ReliableRestaurantApiData
-    ```
+```cs
+ReliableRestaurantApiData
+```
 
 	> Copy all of the code from the `RestaurantApiData.cs` class so we can override methods one by one
 	
@@ -157,6 +160,7 @@ Idempotent operations are great when we can build them. Read, Update, and Delete
         {
             ...
 
+            string jsonRestaurant = JsonConvert.SerializeObject(restaurant);
             var nonceData = Guid.NewGuid().ToString();
             var response = await _httpRetryPolicy.ExecuteAsync(() =>
             {

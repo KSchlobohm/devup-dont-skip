@@ -10,23 +10,27 @@ The script assumes that we already have a SQL database in our subscription.
     Install-Package EntityFramework -Version 6.4.4 -ProjectName OdeToFood.WebApi
     ```
 
+    ```sh
+    Install-Package Azure.Identity -Version 1.10.0 -ProjectName OdeToFood.WebApi
+    ```
+
 1. Add new class for DbContext (snippet)
 
-    ```
-    SqlRestaurantContext.cs
-    ```
+```
+SqlRestaurantContext.cs
+```
 
 1. Add new class for Repository implementation (snippet)
 
-    ```
-    SqlRestaurantData.cs
-    ```
+```
+SqlRestaurantData.cs
+```
 
 1. Add new class for AzureSqlRetry (snippet)
 
-    ```
-    MyConfiguration.cs
-    ```
+```
+MyConfiguration.cs
+```
 
 1. Change dependency injection
 
