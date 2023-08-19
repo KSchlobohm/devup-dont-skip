@@ -133,3 +133,20 @@ Let's explore layered configuration by viewing 2 configuration sources and 2 dif
 
 - The value for the greeting is overriden from config.json as expected
 - We can see an order of operations, a priority, of configuration where Environment vars were overriden by config.json data.
+
+## Step 3: Now we need to move that Redis Secret
+
+1. Right+click then choose "manage user secrets"
+
+* This installs config builders
+
+1. In the open file we need to add our connection string
+
+``` xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <root>
+        <secrets ver="1.0" >
+            <secret name="MyRedisConnString" value="[from web.config]" />
+        </secrets>
+    </root>
+```

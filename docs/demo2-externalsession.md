@@ -129,20 +129,3 @@ We modify behavior of the Web API so that nonce feature scales horizontally.
     monitor
     ```
 
-## Step 4: Now we need to move that Secret
-
-1. Right+click then choose "manage user secrets"
-
-* This installs config builders
-
-1. In the open file we need to add our connection string
-
-``` xml
-    <?xml version="1.0" encoding="utf-8"?>
-    <root>
-        <secrets ver="1.0" >
-            <secret name="MyRedisConnString" value="[from web.config]" />
-        </secrets>
-    </root>
-```
-
