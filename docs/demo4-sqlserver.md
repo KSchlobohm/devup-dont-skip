@@ -35,7 +35,7 @@ MyConfiguration.cs
 1. Change dependency injection
 
     ```cs
-    internal static void RegisterContainer(HttpConfiguration httpConfiguration)
+        internal static void RegisterContainer(HttpConfiguration httpConfiguration)
         {
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(WebApiApplication).Assembly);
