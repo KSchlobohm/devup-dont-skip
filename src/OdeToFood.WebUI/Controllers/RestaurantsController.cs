@@ -47,7 +47,7 @@ namespace OdeToFood.WebUI.Controllers
                 var newRestaurant = await _api.AddAsync(restaurant);
                 return RedirectToAction("Details", new { id = newRestaurant.Id });
             }
-            return View();
+            return View(new Restaurant());
         }
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
