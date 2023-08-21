@@ -51,6 +51,17 @@ We modify behavior of the Web API so that nonce feature scales horizontally.
     }
     ```
 
+1. Modify the HomeController
+
+    ```cs
+        static int requestCount = 1;
+        public ActionResult Index()
+        {
+            Session[Guid.NewGuid().ToString()] = $"Hello world{requestCount++}";
+            return View();
+        }
+    ```
+    
 ## Step 2: Replace existing Caching
 
 1. Add the Redis Package
@@ -106,16 +117,6 @@ We modify behavior of the Web API so that nonce feature scales horizontally.
 
 ## Step 3: Use Azure Portal to demonstrate
 
-1. Modify the HomeController
-
-    ```cs
-        static int requestCount = 1;
-        public ActionResult Index()
-        {
-            Session[Guid.NewGuid().ToString()] = $"Hello world{requestCount++}";
-            return View();
-        }
-    ```
 
 1. Show value for Key
 
