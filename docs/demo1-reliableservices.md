@@ -186,7 +186,8 @@ Idempotent operations are great when we can build them. Read, Update, and Delete
             return BadRequest(ModelState);
         }
 
-        string nonce = Request.Headers.GetValues("X-Nonce")?.FirstOrDefault(); // Get the nonce value from the request headers
+        // Get the nonce value from the request headers
+        string nonce = Request.Headers.GetValues("X-Nonce")?.FirstOrDefault(); 
 
         // Check if the nonce is already in the cache
         if (_cache[nonce] != null)
