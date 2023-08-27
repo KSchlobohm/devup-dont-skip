@@ -150,3 +150,17 @@ Let's explore layered configuration by viewing 2 configuration sources and 2 dif
         </secrets>
     </root>
 ```
+
+config backup
+
+```xml
+
+  <configSections>
+    <section name="configBuilders" type="System.Configuration.ConfigurationBuildersSection, System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" restartOnExternalChanges="false" requirePermission="false" />
+  </configSections>
+  <configBuilders>
+    <builders>
+      <add name="Secrets" userSecretsId="a05389e6-5b18-450b-aabe-501d5e138b12" type="Microsoft.Configuration.ConfigurationBuilders.UserSecretsConfigBuilder, Microsoft.Configuration.ConfigurationBuilders.UserSecrets, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    </builders>
+  </configBuilders>
+```
