@@ -46,11 +46,6 @@ ReliableRestaurantApiData
 ```
 
 	> Copy all of the code from the `RestaurantApiData.cs` class so we can override methods one by one
-	
-1. Observe the method `GetHttpClient()`
-
-	> **Note**<br>
-	> At least this client is static. Tons of errors in web apps trace back to managing HttpClient but I didn't want to make this a demo about using IHttpClientFactory but that would be a better idea than making your own HttpClient objects.
 
 1. Modify the `GetAllAsync` method.
 
@@ -85,11 +80,7 @@ ReliableRestaurantApiData
     {
         InitializePolicy(logger);
     }
-    ```
-
-1. Add a method `InitializePolicy`
-
-    ```cs
+    
     private void InitializePolicy(ILogger logger)
     {
         if (_httpRetryPolicy == null)
