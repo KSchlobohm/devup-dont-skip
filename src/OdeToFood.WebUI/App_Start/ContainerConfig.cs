@@ -13,7 +13,7 @@ namespace OdeToFood.WebUI.App_Start
             var builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<RestaurantApiData>()
+            builder.RegisterType<ReliableRestaurantApiData>()
                    .As<IRestaurantData>()
                    .InstancePerRequest();
             builder.RegisterType<DiagnosticsLogger>()
